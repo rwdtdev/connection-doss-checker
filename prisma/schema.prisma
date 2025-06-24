@@ -1,0 +1,17 @@
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+    // binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+generator client {
+    provider = "prisma-client-js"
+    output   = "../src/generated/prisma"
+}
+
+model TimeCheck {
+    id         String   @id @default(uuid())
+    date       DateTime
+    statusCode Int
+    statusText String
+}
