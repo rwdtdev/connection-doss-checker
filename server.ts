@@ -24,7 +24,7 @@ setInterval(() => {
         },
       });
     });
-}, 6_000);
+}, 60_000);
 
 // http
 //   .createServer(async (req: IncomingMessage, res: ServerResponse) => {
