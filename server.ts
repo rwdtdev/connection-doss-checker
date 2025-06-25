@@ -1,4 +1,3 @@
-import http, { IncomingMessage, ServerResponse } from 'http';
 import { PrismaClient } from './src/generated/prisma';
 
 const prisma = new PrismaClient();
@@ -15,10 +14,17 @@ setInterval(() => {
         },
       });
     })
-    .catch((err) => {
-      console.error('ошибка:', err);
+    .catch(async (err) => {
+      console.error(/*'ошибка:',  err, */ err.cause.toString());
+      await prisma.timeCheck.create({
+        data: {
+          date: new Date(),
+          statusCode: 0,
+          statusText: err.cause.toString(),
+        },
+      });
     });
-}, 60_000);
+}, 6_000);
 
 // http
 //   .createServer(async (req: IncomingMessage, res: ServerResponse) => {
